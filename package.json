@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/yu1k/ddns-client/issues"
   },
-  "homepage": "https://github.com/yu1k/ddns-client#readme"
+  "homepage": "https://github.com/yu1k/ddns-client#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
 }
