@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const axios = require("axios");
+const axios = require('axios');
 
 /**
  * 必要なクレデンシャルをチェック
@@ -8,8 +8,8 @@ const axios = require("axios");
  */
 if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME)) {
     console.log(
-        '###############################' + "\n" +
-        '# Please set env parameter... #' + "\n" +
+        '###############################' + '\n' +
+        '# Please set env parameter... #' + '\n' +
         '###############################'
     );
     process.exit(1);
