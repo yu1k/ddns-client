@@ -1,5 +1,11 @@
 # ddns-client
 
+## 動作環境
+
+- OS: Ubuntu 20.04
+- シェル: bash
+- Node.js Version: ...
+
 ## 起動方法
 
 ```
