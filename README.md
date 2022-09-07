@@ -20,3 +20,4 @@ $ env DDNS_USERNAME='xxx' DDNS_PASSWORD='xxx' DDNS_HOSTNAME='xxx' SLACK_WEBHOOK_
 - [ ] 定時実行
 - [ ] IPアドレスに変更があった場合、Webhook経由でSlackへPOSTして通知する処理
 - [ ] Docker コンテナ上で動作する
+- [ ] テストを追加
