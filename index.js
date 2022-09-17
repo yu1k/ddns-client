@@ -40,7 +40,7 @@ console.log(basicAuthInfo);
 
 // DDNS のDNSレコードを更新する
 async function postDdnsUpdateAPI() {
-    const googleDdnsOptionHeaders = {
+    const GOOGLE_DDNS_OPTION_HEADERS = {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': `Basic ${basicAuthInfo}`,
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
@@ -53,7 +53,7 @@ async function postDdnsUpdateAPI() {
     // console.log('host_ip_addr' + host_ip_addr);
 
     try {
-        const response = await axios.post(`${GOOGLE_DOMAINS_ENDPOINT_URL}?hostname=${process.env.DDNS_HOSTNAME}&myip=${host_ip_addr}`, {}, { 'headers': googleDdnsOptionHeaders });
+        const response = await axios.post(`${GOOGLE_DOMAINS_ENDPOINT_URL}?hostname=${process.env.DDNS_HOSTNAME}&myip=${host_ip_addr}`, {}, { 'headers': GOOGLE_DDNS_OPTION_HEADERS });
         // ref: https://support.google.com/domains/answer/6147083?hl=ja
         console.log('response Status: ' + response.data);
 
