@@ -1,6 +1,7 @@
 'use strict';
 
 const axios = require('axios');
+const cron = require('node-cron');
 
 /**
  * 必要なクレデンシャルをチェック
@@ -64,4 +65,15 @@ async function postDdnsUpdateAPI() {
     };
 }
 
+// 初回の実行はcronを用いず行う
 postDdnsUpdateAPI();
+console.log('initialize, current time: ' + new Date());
+
+let cTime = null;
+// 10分ごとに実行する
+cron.schedule('*/10 * * * *', () => {
+    postDdnsUpdateAPI();
+    // ログ用
+    cTime = new Date();
+    console.log('current time: ' + cTime);
+});
