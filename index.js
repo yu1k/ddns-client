@@ -7,7 +7,7 @@ const cron = require('node-cron');
  * 必要なクレデンシャルをチェック
  * ない場合は process.exit(1) する。
  */
-if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME)) {
+if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME || process.env.SLACK_WEBHOOK_URL)) {
     console.log(
         '###############################' + '\n' +
         '# Please set env parameter... #' + '\n' +
@@ -59,6 +59,16 @@ async function postDdnsUpdateAPI() {
 
         // 最初のリクエスト以外で response.data が good だった場合に該当の response.data をSlackに投げる
         // ...
+        let SLACK_WEBHOOK_OPTIONS_HEADERS = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+        };
+
+        if ((response.data).match(/good/)) {
+            const slack_post = await axios.post(process.env.SLACK_WEBHOOK_URL, { 'channel': '#bot-test', 'username': 'DDNS更新確認くん', 'text': `${response.data}`, 'icon_emoji': ':memo:' }, { 'headers': SLACK_WEBHOOK_OPTIONS_HEADERS });
+            console.log('slack response Status: ' + slack_post.data);
+        }
 
     } catch (error) {
         console.log('response Status: ' + error);
@@ -71,7 +81,7 @@ console.log('initialize, current time: ' + new Date());
 
 let cTime = null;
 // 10分ごとに実行する
-cron.schedule('*/10 * * * *', () => {
+cron.schedule('*/10 * * * * ', () => {
     postDdnsUpdateAPI();
     // ログ用
     cTime = new Date();

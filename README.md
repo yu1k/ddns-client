@@ -48,6 +48,6 @@ $ env DDNS_USERNAME='xxx' DDNS_PASSWORD='xxx' DDNS_HOSTNAME='xxx' SLACK_WEBHOOK_
 - [x] Google Domains ダイナミック DNS への対応
 - [ ] [OPEN IPv6 ダイナミック DNS for フレッツ・光ネクスト への対応](https://i.open.ad.jp/)
 - [x] 定時実行
-- [ ] IPアドレスに変更があった場合、Webhook経由でSlackへPOSTして通知する処理
+- [x] IPアドレスに変更があった場合、Webhook経由でSlackへPOSTして通知する処理
 - [x] Docker コンテナ上で動作する
 - [ ] テストを追加
