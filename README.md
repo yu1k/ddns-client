@@ -14,6 +14,25 @@
 ### Dockerコンテナ上の環境で動かしたい場合
 
 1. `./config.env` ファイルに各種設定を書く
+    
+    ```
+    DDNS_USERNAME='xxx'
+    Google domains ダイナミックDNSでDDNSの設定を行なった際に、Google domainsから払い出されたユーザ名を格納する
+    
+    DDNS_PASSWORD='xxx'
+    Google domains ダイナミックDNSでDDNSの設定を行なった際に、Google domainsから払い出されたパスワードを格納する
+    
+    DDNS_HOSTNAME='host.example.com'
+    Google domains ダイナミックDNSでDDNSの設定を行なった際に、登録したホスト名を格納する
+    
+    SLACK_NOTICE_FLAG='true or false'
+    Slackに通知を出したいかを trueかfalse かで格納する
+    true: Slackへ通知する
+    false: Slackへ通知しない
+    
+    SLACK_WEBHOOK_URL='xxx'
+    SlackでWebhookインテグレーションを設定した際に払い出されたWebhook URLを格納する
+    ```
 
 2. 以下のコマンドを実行して起動する
 
