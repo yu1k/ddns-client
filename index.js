@@ -38,10 +38,16 @@ async function postDdnsUpdateAPI() {
     // デバッグ用
     // console.log('host_ip_addr' + host_ip_addr);
 
+    // ログ用の時間を格納する
+    let currentTime = null;
+
     try {
+        // ログ用
+        currentTime = new Date();
+
         const response = await axios.post(`${GOOGLE_DOMAINS_ENDPOINT_URL}?hostname=${process.env.DDNS_HOSTNAME}&myip=${host_ip_addr}`, {}, { 'headers': GOOGLE_DDNS_OPTION_HEADERS });
         // ref: https://support.google.com/domains/answer/6147083?hl=ja
-        console.log('response Status: ' + response.data);
+        console.log('response Status: ' + response.data + "\n" + 'current time: ' + currentTime);
 
         // 最初のリクエスト以外で response.data が good だった場合に該当の response.data をSlackに投げる
         // ...
@@ -65,11 +71,5 @@ async function postDdnsUpdateAPI() {
 postDdnsUpdateAPI();
 console.log('initialize, current time: ' + new Date());
 
-let cTime = null;
 // 10分ごとに実行する
-cron.schedule('*/10 * * * * ', () => {
-    postDdnsUpdateAPI();
-    // ログ用
-    cTime = new Date();
-    console.log('current time: ' + cTime);
-});
+setInterval(postDdnsUpdateAPI, 600000);
