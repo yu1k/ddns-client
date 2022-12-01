@@ -1,5 +1,7 @@
 # ddns-client
 
+[![CI](https://github.com/yu1k/ddns-client/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/yu1k/ddns-client/actions/workflows/ci.yml)
+
 ## 動作環境
 
 - OS: Ubuntu 20.04
