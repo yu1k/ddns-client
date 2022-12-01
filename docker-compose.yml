@@ -4,8 +4,8 @@ services:
     build: .
     container_name: ddns_client
     tty: true
-    env_file:
-      - config.env
+    #env_file:
+    #  - config.env
     volumes:
       - ./:/home/
       - /home/node_modules/

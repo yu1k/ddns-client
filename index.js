@@ -3,6 +3,10 @@
 const axios = require('axios');
 const cron = require('node-cron');
 
+const path = require("path");
+const ENV_FILE_PATH = path.join(__dirname, "./config.env");
+require("dotenv").config({ path: ENV_FILE_PATH });
+
 const ip = require("./lib/ip");
 
 /**
