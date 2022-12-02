@@ -12,7 +12,7 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
 
 ### 確認済みの環境:
 
-- OS: Ubuntu 20.04, macOS
+- OS: Ubuntu 20.04, macOS 12.6
 - シェル: bash
 - Node.js Version: v16.18.0
 - docker -v: `Docker version 20.10.18`
@@ -67,7 +67,7 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
 
 ...
 
-### Run test
+## Run test
 
 ```
 $ npm run test
