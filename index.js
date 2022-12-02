@@ -63,23 +63,23 @@ async function updateDnsRecord() {
         console.log('response Status: ' + response.data + "\n" + 'current time: ' + currentTime);
 
         // 文字列のtrue, falseをBooleanに変換して SLACK_NOTICE_FLAG変数 に格納する
-        // 最初のリクエスト以外で response.data が good だった場合に該当の response.data をSlackに投げる
-        // ...
-        let SLACK_WEBHOOK_OPTIONS_HEADERS = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            }
-        };
+        let SLACK_NOTICE_FLAG = JSON.parse(process.env.SLACK_NOTICE_FLAG.toLowerCase());
+        if (SLACK_NOTICE_FLAG != false) {
 
+            let SLACK_WEBHOOK_OPTIONS_HEADERS = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                }
+            };
 
-        if ((response.data).match(/good/)) {
-            // 現在のIPアドレスがDNSレコード更新前のIPアドレスと異なっていた場合にSlackへ通知する
-            if (hostIpAddress != ipAddressBeforeUpdate) {
-                const slackPost = await axios.post(process.env.SLACK_WEBHOOK_URL, { 'channel': '#bot-test', 'username': 'DDNS更新確認くん', 'text': `${response.data}\nIPアドレスは更新されました。`, 'icon_emoji': ':memo:' }, { 'headers': SLACK_WEBHOOK_OPTIONS_HEADERS });
-                console.log('slack response Status: ' + slackPost.data);
+            if ((response.data).match(/good/)) {
+                // 現在のIPアドレスがDNSレコード更新前のIPアドレスと異なっていた場合にSlackへ通知する
+                if (hostIpAddress != ipAddressBeforeUpdate) {
+                    const slackPost = await axios.post(process.env.SLACK_WEBHOOK_URL, { 'channel': '#bot-test', 'username': 'DDNS更新確認くん', 'text': `${response.data}\nIPアドレスは更新されました。`, 'icon_emoji': ':memo:' }, { 'headers': SLACK_WEBHOOK_OPTIONS_HEADERS });
+                    console.log('slack response Status: ' + slackPost.data);
+                }
             }
         }
-
     } catch (error) {
         console.log('response Status: ' + error);
     };
