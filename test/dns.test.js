@@ -21,19 +21,25 @@ describe("dnsモジュールをテストする。", () => {
 
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
         return dns.getIpAddressViaDnsLookup("dns.google.com", 6).then((data) => {
-            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888|2001:4860:4860::8844/g));
+            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888|2001:4860:4860::8844|::ffff:8.8.8.8|::ffff:8.8.4.4/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
         return dns.getIpAddressViaDnsLookup("dns.google.com", "v6").then((data) => {
-            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888|2001:4860:4860::8844/g));
+            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888|2001:4860:4860::8844|::ffff:8.8.8.8|::ffff:8.8.4.4/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
         return dns.getIpAddressViaDnsLookup("dns.google.com", "IPv6").then((data) => {
-            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888|2001:4860:4860::8844/g));
+            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888|2001:4860:4860::8844|::ffff:8.8.8.8|::ffff:8.8.4.4/g));
         });
     });
+    test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
+        return dns.getIpAddressViaDnsLookup("example.com", "IPv6").then((data) => {
+            expect(data).toStrictEqual(expect.stringMatching(/2606:2800:220:1:248:1893:25c8:1946|::ffff:93.184.216.34/g));
+        });
+    });
+
 
     // getIpAddressViaDnsLookup関数の例外処理を起こすテスト
     test("dns.getIpAddressViaDnsLookup関数の引数に存在しないホスト名を指定してnullが返ってくるか。", () => {
