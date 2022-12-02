@@ -14,7 +14,7 @@ const dns = require("./lib/dns");
  * 必要なクレデンシャルをチェック
  * ない場合は process.exit(1) する。
  */
-if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME || process.env.SLACK_WEBHOOK_URL)) {
+if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME)) {
     console.log(
         '###############################' + '\n' +
         '# Please set env parameter... #' + '\n' +
@@ -62,8 +62,8 @@ async function updateDnsRecord() {
         // ログを表示させる
         console.log('response Status: ' + response.data + "\n" + 'current time: ' + currentTime);
 
-        // 文字列のtrue, falseをBooleanに変換して SLACK_NOTICE_FLAG変数 に格納する。デフォルトではtrueとして処理を開始するようになっています。
-        let SLACK_NOTICE_FLAG = true;
+        // 文字列のtrue, falseをBooleanに変換して SLACK_NOTICE_FLAG変数 に格納する。デフォルトではSlackへ通知しない設定になっています。
+        let SLACK_NOTICE_FLAG = false;
         if (process.env.SLACK_NOTICE_FLAG) {
             SLACK_NOTICE_FLAG = JSON.parse(process.env.SLACK_NOTICE_FLAG.toLowerCase());
         }

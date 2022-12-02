@@ -26,7 +26,7 @@
     Google domains ダイナミックDNSでDDNSの設定を行なった際に、登録したホスト名を格納します。
     
     SLACK_NOTICE_FLAG=true or false
-    Slackに通知したいかを true, false で指定します。ddns-client でのデフォルト値ではtrueになるように処理しています。
+    Slackに通知したいかを true, false で指定します。ddns-client でのデフォルトではSlackへ通知しない設定になっています。
     true: Slackへ通知します。
     false: Slackへ通知しません。
     
