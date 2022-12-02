@@ -4,34 +4,34 @@ const dns = require("../lib/dns");
 
 describe("dnsモジュールをテストする。", () => {
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv4アドレスが返ってくるか。", () => {
-        return dns.getIpAddressViaDnsLookup("localhost", 4).then((data) => {
-            expect(JSON.parse(data).address).toStrictEqual("127.0.0.1");
+        return dns.getIpAddressViaDnsLookup("dns.google.com", 4).then((data) => {
+            expect(data).toEqual(expect.stringMatching(/8.8.8.8/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv4アドレスが返ってくるか。", () => {
-        return dns.getIpAddressViaDnsLookup("localhost", "IPv4").then((data) => {
-            expect(JSON.parse(data).address).toStrictEqual("127.0.0.1");
+        return dns.getIpAddressViaDnsLookup("dns.google.com", "IPv4").then((data) => {
+            expect(data).toEqual(expect.stringMatching(/8.8.8.8/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv4アドレスが返ってくるか。", () => {
-        return dns.getIpAddressViaDnsLookup("localhost", "v4").then((data) => {
-            expect(JSON.parse(data).address).toStrictEqual("127.0.0.1");
+        return dns.getIpAddressViaDnsLookup("dns.google.com", "v4").then((data) => {
+            expect(data).toEqual(expect.stringMatching(/8.8.8.8/g));
         });
     });
 
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
-        return dns.getIpAddressViaDnsLookup("localhost", 6).then((data) => {
-            expect(JSON.parse(data).address).toStrictEqual("::1");
+        return dns.getIpAddressViaDnsLookup("dns.google.com", 6).then((data) => {
+            expect(data).toEqual(expect.stringMatching(/2001:4860:4860::8888/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
-        return dns.getIpAddressViaDnsLookup("localhost", "v6").then((data) => {
-            expect(JSON.parse(data).address).toStrictEqual("::1");
+        return dns.getIpAddressViaDnsLookup("dns.google.com", "v6").then((data) => {
+            expect(data).toEqual(expect.stringMatching(/2001:4860:4860::8888/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
-        return dns.getIpAddressViaDnsLookup("localhost", "IPv6").then((data) => {
-            expect(JSON.parse(data).address).toStrictEqual("::1");
+        return dns.getIpAddressViaDnsLookup("dns.google.com", "IPv6").then((data) => {
+            expect(data).toEqual(expect.stringMatching(/2001:4860:4860::8888/g));
         });
     });
 
