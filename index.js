@@ -62,10 +62,12 @@ async function updateDnsRecord() {
         // ログを表示させる
         console.log('response Status: ' + response.data + "\n" + 'current time: ' + currentTime);
 
-        // 文字列のtrue, falseをBooleanに変換して SLACK_NOTICE_FLAG変数 に格納する
-        let SLACK_NOTICE_FLAG = JSON.parse(process.env.SLACK_NOTICE_FLAG.toLowerCase());
+        // 文字列のtrue, falseをBooleanに変換して SLACK_NOTICE_FLAG変数 に格納する。デフォルトではtrueとして処理を開始するようになっています。
+        let SLACK_NOTICE_FLAG = true;
+        if (process.env.SLACK_NOTICE_FLAG) {
+            SLACK_NOTICE_FLAG = JSON.parse(process.env.SLACK_NOTICE_FLAG.toLowerCase());
+        }
         if (SLACK_NOTICE_FLAG != false) {
-
             let SLACK_WEBHOOK_OPTIONS_HEADERS = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -79,6 +81,8 @@ async function updateDnsRecord() {
                     console.log('slack response Status: ' + slackPost.data);
                 }
             }
+            const slackPost = await axios.post(process.env.SLACK_WEBHOOK_URL, { 'channel': '#bot-test', 'username': 'DDNS更新確認くん', 'text': `${response.data}\nIPアドレスは更新されました。`, 'icon_emoji': ':memo:' }, { 'headers': SLACK_WEBHOOK_OPTIONS_HEADERS });
+            console.log('slack response Status: ' + slackPost.data);
         }
     } catch (error) {
         console.log('response Status: ' + error);
