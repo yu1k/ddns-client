@@ -9,17 +9,6 @@ describe("runs template", () => {
     });
 });
 
-// IPv4 の環境でテストする
-describe("ip モジュールをテストする。", () => {
-    // getGlobalIpAddress() 関数のテスト
-    test("8ビットごとにドットを境にして表記されているか。正しいIPアドレスの形式になっているか。", () => {
-        return ip.getGlobalIpAddress().then((data) => {
-            expect(data.match(/\./g).length).toBe(3);
-        });
-    });
-});
-
-// IPv4 の環境でテストする
 describe("ip モジュールをテストする。", () => {
     // getGlobalIpAddress() 関数のテスト
     test("8ビットごとにドットを境にして表記されているか。正しいIPアドレスの形式になっているか。", () => {
