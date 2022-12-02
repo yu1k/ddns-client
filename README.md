@@ -2,9 +2,17 @@
 
 [![CI](https://github.com/yu1k/ddns-client/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/yu1k/ddns-client/actions/workflows/ci.yml)
 
-## 動作環境
+## description
 
-- OS: Ubuntu 20.04
+ddns-client は現在のグローバルIPvアドレスまたはIPv6アドレスを取得します。
+
+取得したIPアドレスをネームサーバーに通知し、ダイナミックDNSサービスで登録してあるホスト名のAレコード、またはAAAAレコードを更新するツールです。
+
+## Requirement
+
+### 確認済みの環境:
+
+- OS: Ubuntu 20.04, macOS
 - シェル: bash
 - Node.js Version: v16.18.0
 - docker -v: `Docker version 20.10.18`
