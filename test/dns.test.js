@@ -21,17 +21,17 @@ describe("dnsモジュールをテストする。", () => {
 
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
         return dns.getIpAddressViaDnsLookup("dns.google.com", 6).then((data) => {
-            expect(data).toEqual(expect.stringMatching(/2001:4860:4860::8888/g));
+            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
         return dns.getIpAddressViaDnsLookup("dns.google.com", "v6").then((data) => {
-            expect(data).toEqual(expect.stringMatching(/2001:4860:4860::8888/g));
+            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888/g));
         });
     });
     test("dns.getIpAddressViaDnsLookup関数の引数にホスト名を指定してIPv6アドレスが返ってくるか。", () => {
         return dns.getIpAddressViaDnsLookup("dns.google.com", "IPv6").then((data) => {
-            expect(data).toEqual(expect.stringMatching(/2001:4860:4860::8888/g));
+            expect(data).toStrictEqual(expect.stringMatching(/2001:4860:4860::8888/g));
         });
     });
 
