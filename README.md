@@ -8,6 +8,8 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
 
 取得したIPアドレスをネームサーバーに通知し、ダイナミックDNSサービスで登録してあるホスト名のAレコード、またはAAAAレコードを更新するツールです。
 
+現在は [Google Domains ダイナミックDNS](https://support.google.com/domains/answer/6147083?hl=ja) にのみ対応しています。
+
 ## Requirement
 
 ### 確認済みの環境:
