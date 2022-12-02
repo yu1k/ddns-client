@@ -81,8 +81,6 @@ async function updateDnsRecord() {
                     console.log('slack response Status: ' + slackPost.data);
                 }
             }
-            const slackPost = await axios.post(process.env.SLACK_WEBHOOK_URL, { 'channel': '#bot-test', 'username': 'DDNS更新確認くん', 'text': `${response.data}\nIPアドレスは更新されました。`, 'icon_emoji': ':memo:' }, { 'headers': SLACK_WEBHOOK_OPTIONS_HEADERS });
-            console.log('slack response Status: ' + slackPost.data);
         }
     } catch (error) {
         console.log('response Status: ' + error);
