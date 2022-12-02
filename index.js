@@ -1,7 +1,6 @@
 'use strict';
 
 const axios = require('axios');
-const cron = require('node-cron');
 
 const path = require("path");
 const ENV_FILE_PATH = path.join(__dirname, "./config.env");
