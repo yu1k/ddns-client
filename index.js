@@ -46,7 +46,7 @@ async function updateDnsRecord() {
     // DNSレコードを更新する前に更新前のIPアドレスを格納する
     let ipAddressBeforeUpdate = null;
     dns.getIpAddressViaDnsLookup(process.env.DDNS_HOSTNAME, ip.getIpAddressType(process.env.DDNS_HOSTNAME)).then((data) => {
-        data = ipAddressBeforeUpdate;
+        ipAddressBeforeUpdate = data;
     });
 
     // ログ用の時間を格納する変数
