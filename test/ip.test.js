@@ -21,8 +21,14 @@ describe("ip モジュールをテストする。", () => {
     test("getIpAddressType() の引数にIPv4アドレスを指定して IPv4 の文字列が帰ってくるか", () => {
         expect(ip.getIpAddressType("192.0.2.0")).toBe("IPv4");
     });
+    test("getIpAddressType() の引数にIPv4アドレスを指定して IPv4 の文字列が帰ってくるか", () => {
+        expect(ip.getIpAddressType("127.0.0.1")).toBe("IPv4");
+    });
     test("getIpAddressType() の引数にIPv6アドレスを指定して IPv6 の文字列が帰ってくるか", () => {
         expect(ip.getIpAddressType("2001:db8::")).toBe("IPv6");
+    });
+    test("getIpAddressType() の引数にIPv6アドレスを指定して IPv6 の文字列が帰ってくるか", () => {
+        expect(ip.getIpAddressType("::1")).toBe("IPv6");
     });
     test("getIpAddressType() の引数に存在しないIPアドレスを指定して null が帰ってくるか", () => {
         expect(ip.getIpAddressType("192.0.2.256")).toBe(null);
