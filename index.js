@@ -126,7 +126,7 @@ async function updateDnsRecord() {
             /**
              * リクエストする
              */
-            const response = await axios.post(`${OPEN_DDNS_FOR_FLETS_ENDPOINT_URL}?${HOST_KEY}`, {}, { 'headers': OPEN_DDNS_FOR_FLETS_OPTION_HEADERS });
+            const response = await axios.post(`${OPEN_DDNS_FOR_FLETS_ENDPOINT_URL}?${process.env.HOST_KEY}`, {}, { 'headers': OPEN_DDNS_FOR_FLETS_OPTION_HEADERS });
             // ログを表示させる
             console.log('response Status: ' + response.data + "\n" + 'current time: ' + currentTime);
 
