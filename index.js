@@ -13,7 +13,8 @@ const dns = require("./lib/dns");
  * 必要なクレデンシャルをチェック
  * ない場合は process.exit(1) する。
  */
-if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME)) {
+// サービスが指定されてなかった場合は exit する
+if (!(process.env.DDNS_SERVICE === 'GOOGLE_DOMAINS_DDNS' || process.env.DDNS_SERVICE === 'OPEN_DDNS_FOR_FLETS')){
     console.log(
         '###############################' + '\n' +
         '# Please set env parameter... #' + '\n' +
@@ -34,6 +35,15 @@ console.log(basicAuthInfo);
  * IPv6アドレスの場合は AAAA レコードが更新される
 */
 async function updateDnsRecord() {
+    if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME)) {
+        console.log(
+            '###############################' + '\n' +
+            '# Please set env parameter... #' + '\n' +
+            '###############################'
+        );
+        process.exit(1);
+    }
+
     const GOOGLE_DDNS_OPTION_HEADERS = {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': `Basic ${basicAuthInfo}`,
