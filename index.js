@@ -9,11 +9,7 @@ require("dotenv").config({ path: ENV_FILE_PATH });
 const ip = require("./lib/ip");
 const dns = require("./lib/dns");
 
-/**
- * 必要なクレデンシャルをチェック
- * ない場合は process.exit(1) する。
- */
-// サービスが指定されてなかった場合は exit する
+// サービスが指定されていなかった場合は exit する
 if (!(process.env.DDNS_SERVICE === 'GOOGLE_DOMAINS_DDNS' || process.env.DDNS_SERVICE === 'OPEN_DDNS_FOR_FLETS')){
     console.log(
         '###############################' + '\n' +
@@ -37,6 +33,10 @@ async function updateDnsRecord() {
      * Google Domains DDNS
      */
     if(process.env.DDNS_SERVICE === 'GOOGLE_DOMAINS_DDNS'){
+        /**
+         * 必要なクレデンシャルをチェック
+         * ない場合は process.exit(1) する。
+         */
         if (!(process.env.DDNS_USERNAME || process.env.DDNS_PASSWORD || process.env.DDNS_HOSTNAME)) {
             console.log(
                 '###############################' + '\n' +
