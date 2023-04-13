@@ -29,6 +29,9 @@ const OPEN_DDNS_FOR_FLETS_ENDPOINT_URL = 'https://ddnsapi-v6.open.ad.jp/api/rene
 */
 async function updateDnsRecord() {
 
+    // ログ用の時間を格納する変数
+    let currentTime = null;
+
     /**
      * Google Domains DDNS
      */
@@ -64,9 +67,6 @@ async function updateDnsRecord() {
         dns.getIpAddressViaDnsLookup(process.env.DDNS_HOSTNAME, ip.getIpAddressType(process.env.DDNS_HOSTNAME)).then((data) => {
             ipAddressBeforeUpdate = data;
         });
-
-        // ログ用の時間を格納する変数
-        let currentTime = null;
 
         try {
             // ログ用
