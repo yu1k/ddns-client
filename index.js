@@ -26,10 +26,6 @@ if (!(process.env.DDNS_SERVICE === 'GOOGLE_DOMAINS_DDNS' || process.env.DDNS_SER
 const GOOGLE_DOMAINS_ENDPOINT_URL = 'https://domains.google.com/nic/update';
 const OPEN_DDNS_FOR_FLETS_ENDPOINT_URL = 'https://ddnsapi-v6.open.ad.jp/api/renew/';
 
-// username:password をBase64エンコードする
-const basicAuthInfo = Buffer.from(`${process.env.DDNS_USERNAME}:${process.env.DDNS_PASSWORD}`).toString('base64');
-console.log(basicAuthInfo);
-
 /**
  * DNSレコードを更新する関数
  * IPv4アドレスの場合は Aレコードが更新される
@@ -49,6 +45,10 @@ async function updateDnsRecord() {
             );
             process.exit(1);
         }
+
+        // username:password をBase64エンコードする
+        const basicAuthInfo = Buffer.from(`${process.env.DDNS_USERNAME}:${process.env.DDNS_PASSWORD}`).toString('base64');
+        console.log(basicAuthInfo);
 
         const GOOGLE_DDNS_OPTION_HEADERS = {
             'Content-Type': 'application/json; charset=UTF-8',
