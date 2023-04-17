@@ -28,6 +28,12 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
         
     1. Google Domains DDNS
         
+        - リポジトリをgit cloneし、ddns-clientディレクトリに移動します。
+        
+        ```
+        $ git clone https://github.com/yu1k/ddns-client.git ddns-client && cd $_
+        ```
+        
         - `./config.env` ファイルに各種設定を書きます。
     
         ```
