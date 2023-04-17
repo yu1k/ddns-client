@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-20.04, ubuntu-22.04]
-        node-version: [18.12.0]
+        node-version: [18.12.0, 18.15.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     runs-on: ${{ matrix.os }}
 
