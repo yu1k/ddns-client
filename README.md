@@ -24,30 +24,92 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
 
 ### Dockerコンテナ上の環境で動かしたい場合
 
-1. `./config.env` ファイルに各種設定を書きます。
+1. DDNSサービスごとに設定内容が異なります。
+        
+    1. Google Domains DDNS
+        
+        - `./config.env` ファイルに各種設定を書きます。
     
-    ```
-    DDNS_USERNAME=xxx
-    Google domains ダイナミックDNSでDDNSの設定を行なった際に、Google domainsから払い出されたユーザ名を格納します。
-    
-    DDNS_PASSWORD=xxx
-    Google domains ダイナミックDNSでDDNSの設定を行なった際に、Google domainsから払い出されたパスワードを格納します。
-    DDNS_HOSTNAME=host.example.com
-    Google domains ダイナミックDNSでDDNSの設定を行なった際に、登録したホスト名を格納します。
-    
-    SLACK_NOTICE_FLAG=true or false
-    Slackに通知したいかを true, false で指定します。ddns-client でのデフォルトではSlackへ通知しない設定になっています。
-    true: Slackへ通知します。
-    false: Slackへ通知しません。
-    
-    SLACK_WEBHOOK_URL=xxx
-    Slackで通知したい場合にWebhookインテグレーションを設定します。その際に払い出されたWebhook URLを格納します。
-    ```
+        ```
+        DDNS_SERVICE=GOOGLE_DOMAINS_DDNS
+        DDNS_SERVICE として、Google Domains DDNSを指定します。
+        
+        DDNS_USERNAME=xxx
+        Google domains ダイナミックDNSでDDNSの設定を行なった際に、Google domainsから払い出されたユーザ名を格納します。
+        
+        DDNS_PASSWORD=xxx
+        Google domains ダイナミックDNSでDDNSの設定を行なった際に、Google domainsから払い出されたパスワードを格納します。
+        DDNS_HOSTNAME=host.example.com
+        Google domains ダイナミックDNSでDDNSの設定を行なった際に、登録したホスト名を格納します。
+        
+        SLACK_NOTICE_FLAG=true or false
+        Slackに通知したいかを true, false で指定します。ddns-client でのデフォルトではSlackへ通知しない設定になっています。
+        true: Slackへ通知します。
+        false: Slackへ通知しません。
+        
+        SLACK_WEBHOOK_URL=xxx
+        Slackで通知したい場合にWebhookインテグレーションを設定します。その際に払い出されたWebhook URLを格納します。
+        ```
+        
+    1. OPEN IPv6 ダイナミック DNS for フレッツ・光ネクスト
 
+        - リポジトリをgit cloneし、ddns-clientディレクトリに移動します。
+        
+        ```
+        $ git clone https://github.com/yu1k/ddns-client.git ddns-client && cd $_
+        ```
+        
+        - `./config.env` ファイルに各種設定を書きます。
+
+        ```
+        DDNS_SERVICE=OPEN_DDNS_FOR_FLETS
+        DDNS_SERVICEとして、OPEN_DDNS_FOR_FLETSを指定します。
+        
+        HOST_KEY=xxx
+        https://i.open.ad.jp/ でDDNS ホストを新規作成した際に発行されたホストキーを指定します。
+        ```
+        
+        - 以下のシェルスクリプトを実行します。
+        
+        ```
+        $ sudo bash setup.sh
+        ```
+        
+        下記のシェルスクリプトで行なっている動作としては、
+        
+        DockerのデーモンでIPv6サポートを有効にする設定をします。
+        
+        次に、ホスト側の docker0 インターフェースにIPv6 ULAのサブネットを設定します。
+        
+        `/etc/docker/daemon.json` に指定する `fixed-cidr-v6` キーでは、サンプルとして `2001:db8:1::/64` を指定していますが、実際に運用する際は運用する環境でIPv6 ULAを生成して指定した方がよいと思います。
+        
+        - 下記のコマンドを実行し、IPv6の設定をしたDockerネットワークを作成します。
+        
+        ```
+        $ docker network create --ipv6 --driver=bridge --subnet=2001:db8:1:1::/64 br_ipv6_network --attachable -o com.docker.network.bridge.name="br_ipv6_network"
+        ```
+        
+        上記コマンドを実行し、`br_ipv6_network` というDockerネットワークをブリッジとして作成します。
+        
+        `br_ipv6_network` には、IPv6 ULAとして、`2001:db8:1:1::/64` のネットワークを指定します。
+        
+        - 下記のコマンドを実行してNAPTする設定をします。
+        
+        ```
+        $ sudo ip6tables -t nat -I POSTROUTING -s 2001:db8:1:1::/64 -j MASQUERADE
+        ```
+        
+        上記のコマンドでは、DockerコンテナのIPv6 ULAをホスト側のIPv6 GUAでNAPTする設定を実行します。
+        
+        Dockerネットワークを作成した際に指定したIPv6 ULAのサブネット `2001:db8:1:1::/64` をsourceに置いています。
+        
+        上記のルールにマッチした場合はMASQUERADEします。
+        
+        参考: [ip6tables IPv6 パケットフィルタを管理する - Ubuntu Manpage Repository](https://manpages.ubuntu.com/manpages/trusty/ja/man8/ip6tables.8.html)
+        
 2. 以下のコマンドを実行して起動します。
 
     ```
-    $ git clone https://github.com/yu1k/ddns-client.git ddns-client && cd $_
     $ docker-compose up -d --build
     docker-compose を利用してコンテナを起動させます。
     ```
