@@ -14,6 +14,6 @@ if [ ! -e $DOCKER_DAEMON_CONFIG_FILE ]; then
     echo 'done...'
     exit 0
 else
-    echo '/etc/docker/daemon.json ファイルが存在ます。処理を終了します。'
+    echo '/etc/docker/daemon.json ファイルが存在します。処理を終了します。'
     exit 1
 fi
