@@ -8,7 +8,7 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
 
 取得したIPアドレスをネームサーバーに通知し、ダイナミックDNSサービスで登録してあるホスト名のAレコード、またはAAAAレコードを更新するツールです。
 
-現在は [Google Domains ダイナミックDNS](https://support.google.com/domains/answer/6147083?hl=ja) にのみ対応しています。
+現在は [Google Domains ダイナミックDNS](https://support.google.com/domains/answer/6147083?hl=ja) と [OPEN IPv6 ダイナミック DNS for フレッツ・光ネクスト](https://i.open.ad.jp/) に対応しています。
 
 ## Requirement
 
@@ -16,7 +16,7 @@ ddns-client は現在のグローバルIPv4アドレスまたはIPv6アドレス
 
 - OS: Ubuntu 20.04, macOS 12.6
 - シェル: bash
-- Node.js Version: v16.18.0
+- Node.js Version: v16.18.0, v18.15.0
 - docker -v: `Docker version 20.10.18`
 - docker-compose -v: `docker-compose version 1.29.2`
 
@@ -148,7 +148,7 @@ $ npm run test
 ## 機能
 
 - [x] Google Domains ダイナミック DNS への対応
-- [ ] [OPEN IPv6 ダイナミック DNS for フレッツ・光ネクスト への対応](https://i.open.ad.jp/)
+- [x] [OPEN IPv6 ダイナミック DNS for フレッツ・光ネクスト への対応](https://i.open.ad.jp/)
 - [x] 定時実行
 - [x] IPアドレスに変更があった場合、Webhook経由でSlackへPOSTして通知する処理
 - [x] Docker コンテナ上で動作する
