@@ -9,4 +9,11 @@ services:
     volumes:
       - ./:/home/
       - /home/node_modules/
+    networks:
+      - br_ipv6_network
     restart: always
+
+networks:
+  br_ipv6_network:
+    # docker-compose.yml で管理しない外部のネットワークを利用する, ref: https://docs.docker.jp/compose/compose-file/index.html#external
+    external: true
